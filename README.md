@@ -2,14 +2,14 @@
 
 <h1>Learning Mangement System</h1>
 
-Funtions
+<h4>Funtions</h4>
 <ul>
 <li>Adding Students,Teachers and Courses</li>
 <li>Updating user details and course details</li>
 <li>Deleting users and courses</li>
 </ul>
 
-<h3>Dependencies used</h3>
+<h4>Dependencies used</h4>
 <ul>
 <li> Spring Web</li>
 <li> MySQL Driver</li>
