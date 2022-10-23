@@ -9,3 +9,10 @@ Funtions
 <li>Deleting users and courses</li>
 </ul>
 
+<h3>Dependencies used</h3>
+<ul>
+<li> Spring Web</li>
+<li> MySQL Driver</li>
+<li>ThymeLeaf</li>
+<li> Spring Data JPA</li>
+</ul>
