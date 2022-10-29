@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title></title>
+    <style>
+    body {
+    height: 100vh;
+    }
+
+    * {
+    margin: 0;
+    }
+
+
+    .bg-img {
+    background: url("https://i.pinimg.com/originals/28/ee/93/28ee935a83bb82e7ca1ec366ec608d50.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
+    .formde{
+    margin: 2rem 20rem 2rem;
+    }
+    h2{
+    text-align: center;
+    padding: 2rem;
+    }
+    .whitebox{
+    background: white;
+    margin: 10rem 10rem;
+    border: 5px solid #8ca7f1;
+    border-radius: 20px;
+    padding: 10px;
+    }
+    </style>
+
+
+</head>
+<body class="bg-img">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">School Management System</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">Students</a></li>
+            <li><a href="#">Teachers</a></li>
+            <li><a href="#">Courses</a></li>
+        </ul>
+    </div>
+</nav>
+<br><br><br>
+<div class="whitebox">
+<h2>Student List</h2>
+    <div class="row">
+        <div class="col-sm-1">
+            <p></p>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-sm btn-success" th:href="@{'/students/add/'}">Add new student</a>
+        </div>
+    </div>
+    <br/>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Grade</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <tr th:each="model:${students}">
+            <td th:text="${model.ID}"></td>
+            <td th:text="${model.Name}"></td>
+            <td th:text="${model.Age}"></td>
+            <td th:text="${model.Grade}"></td>
+            <td>
+                &ensp;&ensp;
+                <a class="btn btn-sm btn-primary" th:href="@{'/students/edit/' + ${model.ID}}">Edit</a>
+                &ensp;&ensp;
+                <a class="btn btn-sm btn-danger" th:href="@{'/students/delete/' + ${model.ID}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</div>
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
