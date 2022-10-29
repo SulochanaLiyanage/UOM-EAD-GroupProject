@@ -87,13 +87,7 @@
         </div>
     </div>
     <br/>
-    <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
-         role="alert">
-        [[${message}]]
-        <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
+
 <div class="container" th:if="${students.size() > 0}">
     <table class="table table-striped">
         <thead>
@@ -125,8 +119,6 @@
 
 </div>
 </div>
-
-
 </body>
 
 </html>

@@ -3,8 +3,6 @@ package com.tournament.springbootcrud.controllers;
 import com.tournament.springbootcrud.models.Student;
 import com.tournament.springbootcrud.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +10,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class StudentController {
@@ -56,39 +53,32 @@ public class StudentController {
         return "StudentListView";
     }
 
-    @GetMapping("/students/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable("id") int id) {
-        Optional<Student> studentData = studentRepo.findById(id);
+    @GetMapping("/students/edit/{id}")
+    public String editStudent(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            Student student = studentRepo.findById(id).get();
 
-        if (studentData.isPresent()) {
-            return new ResponseEntity<>(studentData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            model.addAttribute("student", student);
+            model.addAttribute("pageTitle", "Edit Student Data");
+
+            return "StudentAddForm";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+
+            return "redirect:/students";
         }
     }
 
-    @PutMapping("/students/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable("id") int id, @RequestBody Student student) {
-        Optional<Student> studentData = studentRepo.findById(id);
-
-        if (studentData.isPresent()) {
-            Student _student = studentData.get();
-            _student.setName(student.getName());
-            _student.setAge(student.getAge());
-            _student.setGrade(student.getGrade());
-            return new ResponseEntity<>(studentRepo.save(_student), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/students/{id}")
-    public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") int id) {
+    @GetMapping("/students/delete/{id}")
+    public String deleteStudent(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
             studentRepo.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+            redirectAttributes.addFlashAttribute("message", "The Student has been deleted successfully!");
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
         }
+
+        return "redirect:/students";
     }
 }
