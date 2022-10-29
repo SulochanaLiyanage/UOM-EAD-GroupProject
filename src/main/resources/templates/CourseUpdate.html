@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Add Course</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      height: 100vh;
+    }
+
+    * {
+      margin: 0;
+    }
+    .bg-img {
+      background: url("https://i.pinimg.com/originals/28/ee/93/28ee935a83bb82e7ca1ec366ec608d50.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .whitebox{
+      background: white;
+      margin: 10rem 10rem;
+      border: 5px solid #8ca7f1;
+      border-radius: 20px;
+      padding: 10px;
+    }
+    h2{
+      text-align: center;
+      padding: 2rem;
+    }
+  </style>
+</head>
+
+<body class="bg-img">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">School Management System</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li class="active"><a href="#">Courses</a></li>
+
+    </ul>
+  </div>
+</nav>
+<div class="whitebox">
+  <h2>Update Course</h2>
+  <div class="container">
+    <div class="card-body">
+      <div class="col-md-10">
+        <form action="#" th:action="@{/course/save}" th:object="${course}" method="post">
+          <div class="row">
+            <div class="form-group col-md-8">
+              <label for="name" class="col-form-label">Name</label> <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name"> <span th:if="${#fields.hasErrors('name')}" th:errors="{name}" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-8">
+              <label class="col-form-label">Hours</label> <input type="text" th:field="*{hours}" class="form-control" id="hours" placeholder="Hours"> <span th:if="${#fields.hasErrors('hours')}" th:errors="{hours}" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="col-md-6">
+              <input type="submit" class="btn btn-primary" value="Update Course">
+            </div>
+
+            <div class="form-group col-md-8"></div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
