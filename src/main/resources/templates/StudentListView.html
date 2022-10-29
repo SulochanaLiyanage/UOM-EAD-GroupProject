@@ -44,10 +44,19 @@
     border-radius: 20px;
     padding: 10px;
     }
-    .div-scroll {
-    overflow-y: auto;
-    overflow-x:hidden;
-    max-height: 100vh;
+    table {
+    width: 100%;
+    }
+    table tbody {
+    height:300px;
+    overflow-y:scroll;
+    display:block;
+    }
+    table thead {
+    display:block;
+    }
+    table th, td{
+    width: 200px;
     }
     </style>
 
@@ -67,7 +76,6 @@
         </ul>
     </div>
 </nav>
-<br><br><br>
 <div class="whitebox">
 <h2>Student List</h2>
     <div class="row">
@@ -86,7 +94,7 @@
             <span aria-hidden="true">×</span>
         </button>
     </div>
-<div class="container div-scroll" th:if="${students.size() > 0}">
+<div class="container" th:if="${students.size() > 0}">
     <table class="table table-striped">
         <thead>
         <tr>
