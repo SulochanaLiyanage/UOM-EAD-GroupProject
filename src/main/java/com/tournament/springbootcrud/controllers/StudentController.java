@@ -5,45 +5,55 @@ import com.tournament.springbootcrud.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8090")
-@RestController
-@RequestMapping("/api")
+@Controller
 public class StudentController {
     @Autowired
     private StudentRepository studentRepo;
 
-    @PostMapping("/students/add")
-    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+    @GetMapping("/students/new")
+    public String addStudent(Model model) {
+        Student student = new Student();
+
+        model.addAttribute("student", student);
+        model.addAttribute("pageTitle", "Create new Student");
+
+        return "StudentAddForm";
+    }
+
+    @PostMapping("/students/save")
+    public String createStudent(Student student, RedirectAttributes redirectAttributes) {
         try {
-            Student _student = studentRepo
-                    .save(new Student(student.getName(), student.getAge(), student.getGrade()));
-            return new ResponseEntity<>(_student, HttpStatus.CREATED);
+            studentRepo.save(student);
+
+            redirectAttributes.addFlashAttribute("message", "Student data has been saved successfully!");
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            redirectAttributes.addAttribute("message", e.getMessage());
         }
+
+        return "redirect:/students";
     }
 
     @GetMapping("/students")
-    public ResponseEntity<List<Student>> getAllStudents() {
+    public String getAllStudents(Model model) {
         try {
             List<Student> students = new ArrayList<>();
 
             studentRepo.findAll().forEach(students::add);
+            model.addAttribute("students",  students);
 
-            if (students.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(students, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            model.addAttribute("message", e.getMessage());
         }
+        return "StudentListView";
     }
 
     @GetMapping("/students/{id}")

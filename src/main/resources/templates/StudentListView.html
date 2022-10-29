@@ -44,6 +44,11 @@
     border-radius: 20px;
     padding: 10px;
     }
+    .div-scroll {
+    overflow-y: auto;
+    overflow-x:hidden;
+    max-height: 100vh;
+    }
     </style>
 
 
@@ -70,11 +75,18 @@
             <p></p>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-sm btn-success" th:href="@{'/students/add/'}">Add new student</a>
+            <a class="btn btn-sm btn-success" th:href="@{/students/new}">Add new student</a>
         </div>
     </div>
     <br/>
-<div class="container">
+    <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
+         role="alert">
+        [[${message}]]
+        <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+<div class="container div-scroll" th:if="${students.size() > 0}">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -88,16 +100,16 @@
         <tbody>
 
 
-        <tr th:each="model:${students}">
-            <td th:text="${model.ID}"></td>
-            <td th:text="${model.Name}"></td>
-            <td th:text="${model.Age}"></td>
-            <td th:text="${model.Grade}"></td>
+        <tr th:each="student : ${students}">
+            <th scope="row" >[[${student.getID()}]]</th>
+            <td>[[${student.getName()}]]</td>
+            <td>[[${student.getAge()}]]</td>
+            <td>[[${student.getGrade()}]]</td>
             <td>
                 &ensp;&ensp;
-                <a class="btn btn-sm btn-primary" th:href="@{'/students/edit/' + ${model.ID}}">Edit</a>
+                <a class="btn btn-sm btn-primary" th:href="@{'/students/edit/' + ${student.ID}}">Edit</a>
                 &ensp;&ensp;
-                <a class="btn btn-sm btn-danger" th:href="@{'/students/delete/' + ${model.ID}}">Delete</a>
+                <a class="btn btn-sm btn-danger" th:href="@{'/students/delete/' + ${student.ID}}">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -106,13 +118,6 @@
 </div>
 </div>
 
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 
