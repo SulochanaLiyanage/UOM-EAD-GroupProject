@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +64,10 @@ public class CourseController {
             Course course=courseRepository.findById(id).get();
             model.addAttribute("course", course);
             model.addAttribute("pageTitle", "Edit Course Data");
-
+            courseRepository.deleteById(id);
+            course.setID(id);
+            course.setName(course.getName());
+            course.setHours(course.getHours());
             return "CourseUpdate";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
@@ -82,5 +87,10 @@ public class CourseController {
         }
 
         return "redirect:/course";
+    }
+    @GetMapping("/home")
+    public String homePage()
+    {
+        return "home";
     }
 }

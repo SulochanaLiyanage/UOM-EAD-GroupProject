@@ -69,8 +69,8 @@
             <a class="navbar-brand" href="#">School Management System</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li class="active"><a href="#">Courses</a></li>
+            <li><a href="/home">Home</a></li>
+            <li class="active"><a href="/course">Courses</a></li>
         </ul>
     </div>
 </nav>
@@ -96,7 +96,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">ID</th>
+
                 <th scope="col">Name</th>
                 <th scope="col">Hours</th>
                 <th scope="col">Action</th>
@@ -106,7 +106,7 @@
 
 
             <tr th:each="course : ${courses}">
-                <th scope="row" >[[${course.getID()}]]</th>
+
                 <td>[[${course.getName()}]]</td>
                 <td>[[${course.getHours()}]]</td>
                 <td>
