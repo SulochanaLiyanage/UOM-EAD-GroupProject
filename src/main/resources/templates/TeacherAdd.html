@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Update Course</title>
+  <title>Add Course</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -48,34 +48,34 @@
       <a class="navbar-brand" href="#">School Management System</a>
     </div>
     <ul class="nav navbar-nav">
-
-
       <li><a href="/home">Home</a></li>
-      <li ><a href="/students">Students</a></li>
-      <li><a href="/teacher">Teachers</a></li>
-      <li class="active"><a href="/course">Courses</a></li>
-
+      <li><a href="/students">Students</a></li>
+      <li class="active"><a href="/teacher">Teachers</a></li>
+      <li><a href="/course">Courses</a></li>
     </ul>
   </div>
 </nav>
 <div class="whitebox">
-  <h2>Update Course</h2>
+  <h2>[[${pageTitle}]]</h2>
   <div class="container">
     <div class="card-body">
       <div class="col-md-10">
-        <form action="#" th:action="@{/course/save}" th:object="${course}" method="post">
+        <form action="#" th:action="@{/teacher/save}" th:object="${teacher}" method="post">
           <div class="row">
+            <input type="hidden" th:field="*{id}" />
             <div class="form-group col-md-8">
               <label for="name" class="col-form-label">Name</label> <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name"> <span th:if="${#fields.hasErrors('name')}" th:errors="{name}" class="text-danger"></span>
             </div>
             <div class="form-group col-md-8">
-              <label class="col-form-label">Hours</label> <input type="text" th:field="*{hours}" class="form-control" id="hours" placeholder="Hours"> <span th:if="${#fields.hasErrors('hours')}" th:errors="{hours}" class="text-danger"></span>
+              <label class="col-form-label">Age</label> <input type="text" th:field="*{age}" class="form-control" id="age" placeholder="Age"> <span th:if="${#fields.hasErrors('age')}" th:errors="{age}" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-8">
+              <label class="col-form-label">Subject</label> <input type="text" th:field="*{subject}" class="form-control" id="subject" placeholder="Subject"> <span th:if="${#fields.hasErrors('subject')}" th:errors="{subject}" class="text-danger"></span>
             </div>
 
 
-
             <div class="col-md-6">
-              <input type="submit" class="btn btn-primary" value="Update Course">
+              <input type="submit" class="btn btn-primary" value="Add details">
             </div>
 
             <div class="form-group col-md-8"></div>

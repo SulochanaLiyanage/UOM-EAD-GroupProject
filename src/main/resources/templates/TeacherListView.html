@@ -70,22 +70,21 @@
         </div>
         <ul class="nav navbar-nav">
 
-
             <li><a href="/home">Home</a></li>
-            <li ><a href="/students">Students</a></li>
-            <li><a href="/teacher">Teachers</a></li>
-            <li class="active"><a href="/course">Courses</a></li>
+            <li><a href="/students">Students</a></li>
+            <li class="active"><a href="/teacher">Teachers</a></li>
+            <li><a href="/course">Courses</a></li>
         </ul>
     </div>
 </nav>
 <div class="whitebox">
-    <h2>Course List</h2>
+    <h2>Teacher's Details</h2>
     <div class="row">
         <div class="col-sm-1">
             <p></p>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-sm btn-success" th:href="@{/course/new}">Add new course</a>
+            <a class="btn btn-sm btn-success" th:href="@{/teacher/new}">Add new teacher</a>
         </div>
     </div>
     <br/>
@@ -96,28 +95,30 @@
             <span aria-hidden="true">×</span>
         </button>
     </div>
-    <div class="container" th:if="${courses.size() > 0}">
+    <div class="container" th:if="${teachers.size() > 0}">
         <table class="table table-striped">
             <thead>
             <tr>
 
                 <th scope="col">Name</th>
-                <th scope="col">Hours</th>
+                <th scope="col">Age</th>
+                <th scope="col">Subject</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
 
 
-            <tr th:each="course : ${courses}">
+            <tr th:each="teacher : ${teachers}">
 
-                <td>[[${course.getName()}]]</td>
-                <td>[[${course.getHours()}]]</td>
+                <td>[[${teacher.getName()}]]</td>
+                <td>[[${teacher.getAge()}]]</td>
+                <td>[[${teacher.getSubject()}]]</td>
                 <td>
                     &ensp;&ensp;
-                    <a class="btn btn-sm btn-primary" th:href="@{'/course/edit/' + ${course.ID}}">Edit</a>
+                    <a class="btn btn-sm btn-primary" th:href="@{'/teacher/edit/' + ${teacher.id}}">Edit</a>
                     &ensp;&ensp;
-                    <a class="btn btn-sm btn-danger" th:href="@{'/course/delete/' + ${course.ID}}">Delete</a>
+                    <a class="btn btn-sm btn-danger" th:href="@{'/teacher/delete/' + ${teacher.id}}">Delete</a>
                 </td>
             </tr>
             </tbody>
