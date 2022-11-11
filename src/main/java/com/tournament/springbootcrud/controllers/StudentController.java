@@ -82,4 +82,37 @@ public class StudentController {
         return "redirect:/students";
     }
 
+    @GetMapping("students/findStudentByName")
+    public String homePage(Model model)
+    {
+        model.addAttribute("something","randika 46");
+        return "FoundStudents";
+    }
+
+
+    @GetMapping("/students/findStudentByName/{studentName}")
+    public String getUserByName(@PathVariable String studentName, Model model){
+        List<Student> students = new ArrayList<>();
+
+        studentRepo.getStudentByName(studentName).forEach(students::add);
+        model.addAttribute("data",  students);
+
+
+
+//        Student st= studentRepo.getStudentByName(studentName);
+//        model.addAttribute("data",st);
+        return "FoundStudents";
+    }
+
+    @GetMapping("/students/findStudentByName/age/{studentAge}")
+    public String getStudentByAge(@PathVariable String studentAge, Model model){
+        List<Student> students = new ArrayList<>();
+
+        studentRepo.getStudentAge(studentAge).forEach(students::add);
+        model.addAttribute("data",  students);
+//        Student st= studentRepo.getStudentAge(studentAge);
+//        model.addAttribute("data",st);
+        return "FoundStudents";
+    }
+
 }

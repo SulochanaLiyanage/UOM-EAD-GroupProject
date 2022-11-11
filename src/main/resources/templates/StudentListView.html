@@ -85,8 +85,18 @@
         <div class="col-sm-6">
             <a class="btn btn-sm btn-success" th:href="@{/students/new}">Add new student</a>
         </div>
+
     </div>
     <br/>
+    <div class="row">
+        <div class="col-sm-1">
+            <p></p>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-sm btn-success" th:href="@{/students/findStudentByName}">Find Student</a>
+        </div>
+
+    </div>
 
 <div class="container" th:if="${students.size() > 0}">
     <table class="table table-striped">

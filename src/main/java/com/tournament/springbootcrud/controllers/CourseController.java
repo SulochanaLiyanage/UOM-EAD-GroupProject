@@ -26,7 +26,6 @@ public class CourseController {
 
         Course course=new Course();
         model.addAttribute("course", course);
-        model.addAttribute("pageTitle", "Create new Course");
 
         return "CourseAddForm";
     }
@@ -63,7 +62,6 @@ public class CourseController {
         try {
             Course course=courseRepository.findById(id).get();
             model.addAttribute("course", course);
-            model.addAttribute("pageTitle", "Edit Course Data");
             courseRepository.deleteById(id);
             course.setID(id);
             course.setName(course.getName());
